@@ -1,0 +1,55 @@
+﻿<Window x:Class="TestWorkApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestWorkApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="64"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Начало периода" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <TextBlock Text="Конец периода" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <DatePicker x:Name="StartPeriodDP" Grid.Row="1" Margin="4"/>
+        <DatePicker x:Name="EndPeriodDP" Grid.Row="1" Grid.Column="1" Margin="4"/>
+        <DataGrid x:Name="ShopsGrid" Grid.Row="2" Margin="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Width="32" Binding="{Binding Path=IsActive}"/>
+                <DataGridTextColumn Header="Выберите Магазины" Width="1*" Binding="{Binding Path=Title}" IsReadOnly="True"/>
+                <DataGridTextColumn Visibility="Collapsed" Header="Guid" Width="1" Binding="{Binding Path=Id}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="ProductsGrid" Grid.Row="2" Grid.Column="1" Margin="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Width="32" Binding="{Binding Path=IsActive}"/>
+                <DataGridTextColumn Header="Выберите Товары" Width="1*" Binding="{Binding Path=Title}" IsReadOnly="True"/>
+                <DataGridTextColumn Visibility="Collapsed" Header="Guid" Width="1" Binding="{Binding Path=Id}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="ReportGrid" Grid.Column="2" Grid.RowSpan="4" Margin="4" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Магазин" Binding="{Binding Path=ShopTitle}"/>
+                <DataGridTextColumn Header="Код товара" Binding="{Binding Path=ProductBarcode}"/>
+                <DataGridTextColumn Header="Название товара" Binding="{Binding Path=ProductTitle}"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Path=SumProductCount}"/>
+                <DataGridTextColumn Header="Кол-во ср.с." Binding="{Binding Path=SumAvgCount}"/>
+                <DataGridTextColumn Header="Сумма продаж" Binding="{Binding Path=SumPrice}"/>
+                <DataGridTextColumn Header="Среднии прожади за последнее время" Binding="{Binding Path=SumAvgPrice}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="GoReportBtn" Content="Сформировать отчет" Grid.Row="3" Grid.ColumnSpan="2" Margin="4" Click="GoReportBtn_Click"/>
+    </Grid>
+</Window>
